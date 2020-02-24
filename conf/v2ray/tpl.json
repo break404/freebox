@@ -1,0 +1,132 @@
+{
+  "log": {
+    "access": "/var/log/Vaccess.log",
+    "error": "/var/log/Verror.log",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 1080,
+      "listen": "127.0.0.1",
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "ip": null,
+        "clients": null
+      },
+      "streamSettings": null
+    },{
+        "domainOverride": ["tls","http"],
+             "port": 10086,
+             "protocol": "dokodemo-door",
+             "settings": {
+                 "network": "tcp",
+                 "followRedirect": true
+             },
+             "tag":"door"
+  }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "88888",
+            "port": 88888,
+            "users": [
+              {
+                "id": "88888",
+                "alterId": 88888,
+                "email": "t@t.tt",
+                "security": "none"
+              }
+            ]
+          }
+        ],
+        "servers": null,
+        "response": null
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "serverName": null
+        },
+        "tcpSettings": null,
+        "kcpSettings": null,
+        "wsSettings": {
+          "connectionReuse": true,
+          "path": "88888",
+          "headers": {
+            "Host": "88888"
+          }
+        },
+        "httpSettings": null
+      },
+      "mux": {
+        "enabled": true
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {
+        "vnext": null,
+        "servers": null,
+        "response": null
+      },
+      "streamSettings": null,
+      "mux": null
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole",
+      "settings": {
+        "vnext": null,
+        "servers": null,
+        "response": {
+          "type": "http"
+        }
+      },
+      "streamSettings": null,
+      "mux": null
+    }
+  ],
+  "dns": {
+    "hosts": {},
+    "servers": [
+      "1.1.1.1",
+      "8.8.8.8",     
+      "localhost"
+    ]
+  },
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+        {
+            "type": "field",
+            "outboundTag": "direct",
+            "domain": ["geosite:cn"] 
+        },
+        {
+            "type": "chinaip",
+            "outboundTag": "direct",
+            "ip": [
+                "geoip:cn",
+                "geoip:private"
+            ]
+      }
+    ]
+}
+}
