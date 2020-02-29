@@ -119,13 +119,13 @@ class NetworkController extends Controller
         }else{
             $dns1 = '1.1.1.1';
         }
-        if(strlen($dns2) >5){
+        /*if(strlen($dns2) >5){
             if(!filter_var($dns2, FILTER_VALIDATE_IP)){
                 return response() ->json(['code'=>0,'msg'=>'提交的DNS2地址不合法！']);
             }
         }else{
             $dns2 = '8.8.8.8';
-        }
+        }*/
 
         $config = ConfigModel::where('id',1) ->first();
         //重新写入一个新的interface
