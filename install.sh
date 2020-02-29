@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #开启ssh服务
-update-rc.d ssh enable
+update-rc.d ssh defaults
 
 #替换源
-echo "deb http://mirrors.aliyun.com/raspbian/raspbian/ stretch main contrib non-free rpi" > /etc/apt/sources.list
-echo "deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ stretch main ui" > /etc/apt/sources.list.d/raspi.list
+#echo "deb http://mirrors.aliyun.com/raspbian/raspbian/ stretch main contrib non-free rpi" > /etc/apt/sources.list
+#echo "deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/ stretch main ui" > /etc/apt/sources.list.d/raspi.list
 apt-get update
 
 #下载数据
