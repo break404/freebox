@@ -17,7 +17,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-ifconfig eth0:0 10.251.251.251 netmask 255.255.255.0
+ifconfig eth0:1 10.251.251.251 netmask 255.255.255.0 up
 
 iptables-restore </etc/iptables.ipv4.nat 
 

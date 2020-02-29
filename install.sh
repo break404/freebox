@@ -108,12 +108,15 @@ cp ./conf/sysctl.conf /etc/
 cp ./conf/dhcpcd.conf /etc/
 cp -rf ./conf/hostapd /etc/
 sysctl -p
+cp ./conf/dnsmasq.conf /etc/
 
 #初始化网络
 cp ./conf/network/interfaces /etc/network/
 
 cp ./conf/rc.local /etc/
 chmod +x /etc/rc.local
+rfkill unblock 0 
+rfkill unblock 1
 
 
 
